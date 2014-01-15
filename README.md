@@ -26,8 +26,9 @@ appropriate policy for that bucket.
 1. Set your AWS credentials in your Django settings:
 
     ```python
-   AWS_ACCESS_KEY = 'AKDERPDERPDERPDERPDERP'
-   AWS_SECRET_ACCESS_KEY = 'iL+HERPHERPHERPHERPHERPHERPSQUIRT'
+    AWS_ACCESS_KEY = 'AKDERPDERPDERPDERPDERP'
+    AWS_SECRET_ACCESS_KEY = 'iL+HERPHERPHERPHERPHERPHERPSQUIRT'
+    AWS_BILLING_BUCKET = 'your-aws-billing-info-bucket-name'
     ```
 
 1. Add 'aws\_billing' to your INSTALLED\_APPS:
