@@ -20,8 +20,8 @@ appropriate policy for that bucket.
 1. Set your AWS credentials in your Django settings:
 
     ```python
-   AWS\_ACCESS\_KEY = 'AKDERPDERPDERPDERPDERP'
-   AWS\_SECRET\_ACCESS\_KEY = 'iL+HERPHERPHERPHERPHERPHERPSQUIRT'
+   AWS_ACCESS_KEY = 'AKDERPDERPDERPDERPDERP'
+   AWS_SECRET_ACCESS_KEY = 'iL+HERPHERPHERPHERPHERPHERPSQUIRT'
     ```
 
 1. Add 'aws\_billing' to your INSTALLED\_APPS:
@@ -34,7 +34,13 @@ appropriate policy for that bucket.
      )
     ```
 
-2. Run the billing command:
+1. Run syncdb:
+
+    ```bash
+    python manage.py syncdb
+    ```
+
+1. Run the billing command:
 
     ```bash
     python manage.py process_aws_billing
