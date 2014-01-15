@@ -1,3 +1,5 @@
+![Bezos is a Hustler](http://i.imgur.com/Lw15zkJ.jpg)
+
 django-aws-billing
 ==================
 
