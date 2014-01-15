@@ -3,7 +3,7 @@ django-aws-billing
 
 Djagno AWS Usage/Billing Package. **Work in Progress**. Some of this is based off of [oddskool's aws-billing](https://github.com/oddskool/aws_billing) server.
 
-# Set up
+## Set up
 
 1. First you need to set up [Programmatic Billing
 Access](http://docs.aws.amazon.com/awsaccountbilling/latest/about/programaccess.html) from your [billing preferences
@@ -13,21 +13,29 @@ appropriate policy for that bucket.
 
 1. Install django-aws-billing:
 
+    ```bash
     pip install django-aws-billing
+    ```
 
 1. Set your AWS credentials in your Django settings:
 
+    ```python
    AWS\_ACCESS\_KEY = 'AKDERPDERPDERPDERPDERP'
    AWS\_SECRET\_ACCESS\_KEY = 'iL+HERPHERPHERPHERPHERPHERPSQUIRT'
+    ```
 
 1. Add 'aws\_billing' to your INSTALLED\_APPS:
 
+    ```bash
     INSTALLED_APPS = (
         ...
         'aws_billing',
         ...
      )
+    ```
 
 2. Run the billing command:
 
+    ```bash
     python manage.py process_aws_billing
+    ```
