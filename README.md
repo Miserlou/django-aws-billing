@@ -3,7 +3,11 @@
 django-aws-billing
 ==================
 
-Djagno AWS Usage/Billing Package. **Work in Progress**. Some of this is based off of [oddskool's aws-billing](https://github.com/oddskool/aws_billing) server.
+Django AWS Usage/Billing Package. **Work in Progress**. Some of this is based off of [oddskool's aws-billing](https://github.com/oddskool/aws_billing) server.
+
+* Version: 0.0.0
+* Status: In Development
+* Don't: Use This Yet
 
 ## Set up
 
