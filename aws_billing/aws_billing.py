@@ -99,6 +99,8 @@ def parse(fd, price_floor_dollars=0.1):
 
 def retrieve_fd(account, bucket_name, month=None, tmp_dir='.'):
     month = month or datetime.now().strftime('%Y-%m')
+    if '-' in account:
+        account = account.replace('-', '')
     fn = "%s-aws-billing-detailed-line-items-with-resources-and-tags-%s.csv" % (account, month)
     remote_fn = "s3://%s/%s.zip" % (bucket_name, fn)
     print "remote fn:", remote_fn
@@ -145,7 +147,7 @@ def unitize(usage_type, usage_quantity):
 def parse_all(account_id, bucket_name):
     fd = retrieve_fd(account_id, bucket_name)
     stats = parse(fd)
-    self.application.read_time = now
+    read_time = now
     for d in stats:
         if 'BILLING' in d[0]:
             print "%s %.2f" % (d[0][10:],d[1]['Cost']))
