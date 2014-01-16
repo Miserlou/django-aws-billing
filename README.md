@@ -32,8 +32,7 @@ appropriate policy for that bucket.
     AWS_ACCESS_KEY = 'AKDERPDERPDERPDERPDERP'
     AWS_SECRET_ACCESS_KEY = 'iL+HERPHERPHERPHERPHERPHERPSQUIRT'
     AWS_BILLING_BUCKET = 'your-aws-billing-info-bucket-name'
-    AWS_ACCOUNT_ID = '1234-5679-0000' # Find this number from your AWS [Manage Account
-    page](https://portal.aws.amazon.com/gp/aws/manageYourAccount)
+    AWS_ACCOUNT_ID = '1234-5679-0000' # Find this number from your AWS [Manage Account page](https://portal.aws.amazon.com/gp/aws/manageYourAccount)
     ```
 
 1. Add 'aws\_billing' to your INSTALLED\_APPS:
