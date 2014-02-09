@@ -34,7 +34,7 @@ class BillingRecord(models.Model):
     payer_account_id = models.IntegerField('Payer Account ID', null=True, blank=True)
     pricing_plan_id = models.IntegerField('Pricing Plan ID', null=True, blank=True)
     product_name = models.CharField('Product Name', null=True, blank=True, max_length=255)
-    rate = models.FloatField('Cost', null=True, blank=True)
+    rate = models.FloatField('Rate', null=True, blank=True)
     rate_id = models.IntegerField('Rate ID', null=True, blank=True)
     record_id = models.CharField('Record ID', null=False, blank=False, unique=True, max_length=255) # This is the magic
     record_type = models.CharField('Record Type', null=True, blank=True, max_length=255)
@@ -42,7 +42,7 @@ class BillingRecord(models.Model):
     resource_id = models.CharField('Resource ID', null=True, blank=True, max_length=255)
     subscription_id = models.IntegerField('Subscription ID', null=True, blank=True)
     usage_end_date = models.DateTimeField('Usage End Date', null=True, blank=True)
-    usage_quantity = models.IntegerField('Usage Quantity', null=True, blank=True)
+    usage_quantity = models.FloatField('Usage Quantity', null=True, blank=True)
     usage_start_date = models.DateTimeField('Usage Start Date', null=True, blank=True)
     usage_type = models.CharField('Usage Type', null=True, blank=True, max_length=255)
 
