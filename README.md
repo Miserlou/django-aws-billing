@@ -65,6 +65,7 @@ appropriate policy for that bucket.
     from aws_billing import aws_billing
     aws_billing.get_cost_for_resource('your-resource-name') # 12.002415
     aws_billing.get_total_cost() # 42.001234
+    aws_billing.get_all_costs_by_resource() # {'your-resource-name': 12.002415, 'your-other-resource-name': 29.998819}
     ```
 
 Hooray!
