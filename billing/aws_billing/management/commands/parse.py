@@ -1,11 +1,18 @@
 from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings as aws_settings
+
 from aws_billing.models import BillingRecord
 
 import time
 import sys
 import csv
+import os
+import zipfile
+
+from datetime import datetime
 from pprint import pprint
 from collections import defaultdict
+from boto import connect_s3
 
 class Command(BaseCommand):
     args = '<filename>'
@@ -16,11 +23,10 @@ class Command(BaseCommand):
         filename = None
         for arg in args:
             filename = arg
+            fd = open(filename)
         if not filename:
-            print "Please supply a file to parse."
-            return
+            fd = retrieve_remote_stats(aws_settings.AWS_ACCOUNT_ID, aws_settings.AWS_BILLING_BUCKET)
 
-        fd = open(filename)
         reader = csv.reader(fd, delimiter=',', quotechar='"')
         legend = None
         stats = defaultdict(lambda: defaultdict(int))
@@ -67,4 +73,15 @@ class Command(BaseCommand):
                 record.usage_type = data['UsageType']
                 record.save()
 
+def retrieve_remote_stats(account, bucket_name, month=None, tmp_dir='.'):
+    month = month or datetime.now().strftime('%Y-%m')
+    fn = "%s-aws-billing-detailed-line-items-with-resources-and-tags-%s.csv" % (account, month)
+    remote_fn = "s3://%s/%s.zip" % (bucket_name, fn)
+    s3 = connect_s3(aws_settings.AWS_ACCESS_KEY, aws_settings.AWS_SECRET_ACCESS_KEY)
+    bucket = s3.get_bucket(bucket_name)
+    key = bucket.get_key(fn+'.zip')
+    if not key:
+        raise Exception("remote file not ready : %s" % remote_fn)
+    key.get_contents_to_filename(os.path.join(tmp_dir, fn+'.zip'))
+    return zipfile.ZipFile(os.path.join(tmp_dir, fn+'.zip')).open(fn)
 
