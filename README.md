@@ -56,3 +56,15 @@ appropriate policy for that bucket.
     ```bash
     python manage.py process_aws_billing
     ```
+
+## Programmatic Usage
+
+1. Import it and call it!
+
+    ```python
+    from aws_billing import aws_billing
+    aws_billing.get_cost_for_resource('your-resource-name') # 12.002415
+    aws_billing.get_total_cost() # 42.001234
+    ```
+
+Hooray!
