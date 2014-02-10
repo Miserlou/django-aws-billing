@@ -5,3 +5,5 @@ local_settings.py
 *.DS_Store
 data.csv
 *.csv.zip
+env/
+django_aws_billing.egg-info
