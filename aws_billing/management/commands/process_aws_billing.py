@@ -1,7 +1,10 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings as aws_settings
 
-from aws_billing.models import BillingRecord
+try:
+    from libs.django_aws_billing.aws_billing.models import BillingRecord
+except Exception, e:
+    from aws_billing.models import BillingRecord
 
 import time
 import sys
@@ -25,7 +28,7 @@ class Command(BaseCommand):
             filename = arg
             fd = open(filename)
         if not filename:
-            fd = retrieve_remote_stats(aws_settings.AWS_ACCOUNT_ID, aws_settings.AWS_BILLING_BUCKET)
+            fd = retrieve_remote_stats(aws_settings.AWS_ACCOUNT_ID.replace('-', ''), aws_settings.AWS_BILLING_BUCKET)
 
         reader = csv.reader(fd, delimiter=',', quotechar='"')
         legend = None
