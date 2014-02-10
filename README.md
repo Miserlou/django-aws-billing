@@ -5,9 +5,9 @@ django-aws-billing
 
 Django AWS Usage/Billing Package. **Work in Progress**.
 
-* Version: 0.0.0
-* Status: In Development
-* Don't: Use This Yet
+* Version: 0.1.0
+* Status: Working
+* Not testing in a production setting yet. Should be okay though.
 
 ## Set up
 
