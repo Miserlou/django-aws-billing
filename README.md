@@ -61,6 +61,12 @@ appropriate policy for that bucket.
     python manage.py process_aws_billing
     ```
 
+1. You can then see the costs with:
+
+    ```bash
+    python manage.py aws_costs
+    ```
+
 ## Programmatic Usage
 
 1. Import it and call it!
@@ -77,6 +83,7 @@ Hooray!
 ## TODO:
 
 * Hopefully, this package will also include utilities to create nice little javascript charts.
+* Something something timezones. And date ranges on the utilities.
 * Tests
 * Your idea here? The future is unwritten..
 
