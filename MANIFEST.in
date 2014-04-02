@@ -1,2 +1,3 @@
-include README.md LICENSE
-recursive-include billing *.py 
+include README.md LICENSE requirements.txt
+recursive-include aws_billing *.py
+recursive-include aws_billing/management/commands *.py
