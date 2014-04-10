@@ -5,13 +5,12 @@ django-aws-billing
 
 Django AWS Usage/Billing Package. **Work in Progress**.
 
-* Version: 0.2.0
+* Version: 0.2.6
 * Status: Working!
-* Not tested in a production setting yet. Should be okay though.
 
 Maps items from CSVs in the AWS programmatic billing access reports to a **BillingRecord** model in Django, allowing billing
 queries to be processed via the Django ORM. Also provides some convenience methods to calculate costs for specific
-resources. 
+resources.
 
 ## Set up
 
