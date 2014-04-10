@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.conf import settings as aws_settings
 
 try:
@@ -6,15 +6,15 @@ try:
 except Exception, e:
     from aws_billing.models import BillingRecord
 
-import time
-import sys
 import csv
 import os
 import zipfile
+try:
+      from cStringIO import StringIO
+except:
+      from StringIO import StringIO
 
 from datetime import datetime
-from pprint import pprint
-from collections import defaultdict
 from boto import connect_s3
 
 class Command(BaseCommand):
@@ -32,13 +32,12 @@ class Command(BaseCommand):
 
         reader = csv.reader(fd, delimiter=',', quotechar='"')
         legend = None
-        stats = defaultdict(lambda: defaultdict(int))
 
         for row in reader:
 
             # First, get the legend from the very first row.
             if not legend:
-                legend = row    
+                legend = row
                 continue
 
             # Parse the row into a Python dict using the legend.
@@ -76,7 +75,7 @@ class Command(BaseCommand):
                 record.usage_type = data['UsageType']
                 record.save()
 
-def retrieve_remote_stats(account, bucket_name, month=None, tmp_dir='.'):
+def retrieve_remote_stats(account, bucket_name, month=None, tmp_dir='.', as_file=False):
     month = month or datetime.now().strftime('%Y-%m')
     fn = "%s-aws-billing-detailed-line-items-with-resources-and-tags-%s.csv" % (account, month)
     remote_fn = "s3://%s/%s.zip" % (bucket_name, fn)
@@ -85,6 +84,13 @@ def retrieve_remote_stats(account, bucket_name, month=None, tmp_dir='.'):
     key = bucket.get_key(fn+'.zip')
     if not key:
         raise Exception("remote file not ready : %s" % remote_fn)
-    key.get_contents_to_filename(os.path.join(tmp_dir, fn+'.zip'))
-    return zipfile.ZipFile(os.path.join(tmp_dir, fn+'.zip')).open(fn)
 
+    # This is the old method which wrote to disk, but won't work with cloud services like Heroku.
+    if as_file:
+        key.get_contents_to_filename(os.path.join(tmp_dir, fn+'.zip'))
+        return zipfile.ZipFile(os.path.join(tmp_dir, fn+'.zip')).open(fn)
+    else:
+        zipstring = key.get_contents_as_string()
+        zipstringio = StringIO(zipstring)
+        zf = zipfile.ZipFile(zipstringio).open(fn)
+        return zf
