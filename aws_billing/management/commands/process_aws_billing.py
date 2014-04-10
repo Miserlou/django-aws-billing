@@ -56,7 +56,10 @@ class Command(BaseCommand):
                 try:
                     record = BillingRecord()
                     record.availablility_zone = data['AvailabilityZone']
-                    record.cost = data['Cost']
+                    try:
+                        record.cost = data['Cost']
+                    except Exception, e:
+                        record.cost = data['BlendedCost']
                     record.invoice_id = data['InvoiceID']
                     record.item_description = data['ItemDescription']
                     record.linked_account_id = data['LinkedAccountId']
@@ -64,7 +67,10 @@ class Command(BaseCommand):
                     record.payer_account_id = data['PayerAccountId']
                     record.pricing_plan_id = data['PricingPlanId']
                     record.product_name = data['ProductName']
-                    record.rate = data['Rate']
+                    try:
+                        record.rate = data['Rate']
+                    except Exception, e:
+                        record.rate = data['BlendedRate']
                     record.rate_id = data['RateId']
                     record.record_id = data['RecordId'] # This is the magic
                     record.record_type = data['RecordType']
