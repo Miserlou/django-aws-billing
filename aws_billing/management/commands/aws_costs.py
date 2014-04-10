@@ -4,7 +4,7 @@ from django.conf import settings as aws_settings
 try:
     from libs.django_aws_billing.aws_billing import aws_billing
 except Exception, e:
-    import aws_billing as aws_billing
+    import aws_billing.aws_billing as aws_billing
 
 import time
 import sys

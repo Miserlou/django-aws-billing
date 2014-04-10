@@ -15,6 +15,7 @@ except:
       from StringIO import StringIO
 
 from datetime import datetime
+from pprint import pprint
 from boto import connect_s3
 
 class Command(BaseCommand):
@@ -52,28 +53,34 @@ class Command(BaseCommand):
                 continue
             else:
                 # Here we go!
-                record = BillingRecord()
-                record.availablility_zone = data['AvailabilityZone']
-                record.cost = data['Cost']
-                record.invoice_id = data['InvoiceID']
-                record.item_description = data['ItemDescription']
-                record.linked_account_id = data['LinkedAccountId']
-                record.operation = data['Operation']
-                record.payer_account_id = data['PayerAccountId']
-                record.pricing_plan_id = data['PricingPlanId']
-                record.product_name = data['ProductName']
-                record.rate = data['Rate']
-                record.rate_id = data['RateId']
-                record.record_id = data['RecordId'] # This is the magic
-                record.record_type = data['RecordType']
-                record.reserved_instance = data['ReservedInstance']
-                record.resource_id = data['ResourceId']
-                record.subscription_id = data['SubscriptionId']
-                record.usage_end_date = data['UsageEndDate']
-                record.usage_quantity = data['UsageQuantity']
-                record.usage_start_date= data['UsageStartDate']
-                record.usage_type = data['UsageType']
-                record.save()
+                try:
+                    record = BillingRecord()
+                    record.availablility_zone = data['AvailabilityZone']
+                    record.cost = data['Cost']
+                    record.invoice_id = data['InvoiceID']
+                    record.item_description = data['ItemDescription']
+                    record.linked_account_id = data['LinkedAccountId']
+                    record.operation = data['Operation']
+                    record.payer_account_id = data['PayerAccountId']
+                    record.pricing_plan_id = data['PricingPlanId']
+                    record.product_name = data['ProductName']
+                    record.rate = data['Rate']
+                    record.rate_id = data['RateId']
+                    record.record_id = data['RecordId'] # This is the magic
+                    record.record_type = data['RecordType']
+                    record.reserved_instance = data['ReservedInstance']
+                    record.resource_id = data['ResourceId']
+                    record.subscription_id = data['SubscriptionId']
+                    record.usage_end_date = data['UsageEndDate']
+                    record.usage_quantity = data['UsageQuantity']
+                    record.usage_start_date= data['UsageStartDate']
+                    record.usage_type = data['UsageType']
+                    record.save()
+                except Exception, e:
+                    print "There was an error saving your record: "
+                    print e
+                    print "Here is the problem data: "
+                    pprint(data) 
 
 def retrieve_remote_stats(account, bucket_name, month=None, tmp_dir='.', as_file=False):
     month = month or datetime.now().strftime('%Y-%m')
