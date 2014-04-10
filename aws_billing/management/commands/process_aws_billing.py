@@ -86,7 +86,10 @@ class Command(BaseCommand):
                     print "There was an error saving your record: "
                     print e
                     print "Here is the problem data: "
-                    pprint(data) 
+                    pprint(data)
+                    print "And here's a shell: "
+                    import pdb
+                    pdb.set_trace() 
 
 def retrieve_remote_stats(account, bucket_name, month=None, tmp_dir='.', as_file=False):
     month = month or datetime.now().strftime('%Y-%m')

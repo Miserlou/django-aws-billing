@@ -11,7 +11,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-aws-billing',
-    version='0.2.3',
+    version='0.2.5',
     packages=['aws_billing'],
     install_requires=required,
     include_package_data=True,
